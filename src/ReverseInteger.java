@@ -1,5 +1,3 @@
-import java.sql.SQLOutput;
-
 public class ReverseInteger {
     public int reverse(int x) {
         int result = 0;
