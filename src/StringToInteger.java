@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 public class StringToInteger {
     public int myAtoi(String s) {
         if (s == null || s.isEmpty()) return 0;
