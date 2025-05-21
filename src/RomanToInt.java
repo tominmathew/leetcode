@@ -13,22 +13,26 @@ public class RomanToInt {
         int j = 0;
 
         for (int i = 0; i < romans.length - 1;) {
-        
-                if ((s.charAt(j) == 'I') && (s.charAt(j + 1) == 'X') && (s.length() > 1)) {
+            while (s.length() > 1 && j + 1 < s.length()) {
+                if ((s.charAt(j) == 'I') && (s.charAt(j + 1) == 'X')) {
                     result += 9;
-                } else if ((s.charAt(j) == 'I') && (s.charAt(j + 1) == 'V') && (s.length() > 1)) {
+                } else if ((s.charAt(j) == 'I') && (s.charAt(j + 1) == 'V')) {
                     result += 5;
-                } else if ((s.charAt(j) == 'X') && (s.charAt(j + 1) == 'C') && (s.length() > 1)) {
+                } else if ((s.charAt(j) == 'X') && (s.charAt(j + 1) == 'C')) {
                     result += 90;
-                } else if ((s.charAt(j) == 'X') && (s.charAt(j + 1) == 'L') && (s.length() > 1)) {
+                } else if ((s.charAt(j) == 'X') && (s.charAt(j + 1) == 'L')) {
                     result += 50;
-                } else if ((s.charAt(j) == 'C') && (s.charAt(j + 1) == 'M') && (s.length() > 1)) {
+                } else if ((s.charAt(j) == 'C') && (s.charAt(j + 1) == 'M')) {
                     result += 900;
-                } else if ((s.charAt(j) == 'C') && (s.charAt(j + 1) == 'D') && (s.length() > 1)) {
+                } else if ((s.charAt(j) == 'C') && (s.charAt(j + 1) == 'D')) {
                     result += 500;
-                } else if (romans[i] == s.charAt(j)) {
+                } else {
+                    break;
+                }
+            }
+                if (romans[i] == s.charAt(j)) {
                     result = result + values[i];
-                    s = s.substring(j + 1);
+                    s = s.substring(1);
                     i = 0;
                 } else {
                     i++;
