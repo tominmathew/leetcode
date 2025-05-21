@@ -1,36 +1,45 @@
-public class StringToInteger{
-    public static void main(String[] args) {
-        String string = "  -  -124";
-        System.out.println(myAtoi(string));
+public class StringToInteger {
+    public int myAtoi(String s) {
+        if (s == null || s.isEmpty()) return 0;
+
+        int i = 0, n = s.length();
+        int sign = 1;
+        long result = 0;
+
+        while (i < n && s.charAt(i) == ' ') {
+            i++;
+        }
+
+        if (i < n && (s.charAt(i) == '+' || s.charAt(i) == '-')) {
+            sign = (s.charAt(i) == '-') ? -1 : 1;
+            i++;
+        }
+
+        while (i < n && Character.isDigit(s.charAt(i))) {
+            int digit = s.charAt(i) - '0';
+            result = result * 10 + digit;
+
+            // Step 4: Check for overflow and clamp the result
+            if (sign * result > Integer.MAX_VALUE) {
+                return Integer.MAX_VALUE;
+            }
+            if (sign * result < Integer.MIN_VALUE) {
+                return Integer.MIN_VALUE;
+            }
+
+            i++;
+        }
+
+        return (int) (sign * result);
     }
 
-    public static int myAtoi(String s) {
+    public static void main(String[] args) {
+        StringToInteger stringToInteger = new StringToInteger();
 
-     int sign = 1;
-     int result = 0;
-     boolean numberStarted = false;
-     boolean signSet = false;
-
-     for(char c : s.toCharArray()){
-        if(c == ' ' && !signSet && !numberStarted){
-            continue;
-        } else if ((c == '-' || c == '+') && !signSet && !numberStarted){
-            sign = (c == '-') ? -1 : 1;
-            signSet = true;
-        } else if (Character.isDigit(c)){
-            int digit = c - '0';
-
-            if (result > (Integer.MAX_VALUE - digit) / 10) {
-                    return (sign == 1) ? Integer.MAX_VALUE : Integer.MIN_VALUE;
-                }
-
-            result = (result*10)+digit;
-            numberStarted = true;
-        } else {
-            break;
-        }
-     }
-
-            return result*sign;
-        }
+        System.out.println(stringToInteger.myAtoi("42"));        
+        System.out.println(stringToInteger.myAtoi("   -42"));          
+        System.out.println(stringToInteger.myAtoi("4193 with words")); 
+        System.out.println(stringToInteger.myAtoi("words and 987"));  
+        System.out.println(stringToInteger.myAtoi("-91283472332"));    
+    }
 }
