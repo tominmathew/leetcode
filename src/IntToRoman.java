@@ -1,6 +1,3 @@
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class IntToRoman {
     public static void main(String[] args) {
         int number = 12890;
