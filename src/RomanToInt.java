@@ -5,22 +5,32 @@ public class RomanToInt {
         System.out.println(romanToInt(number));
     }
 
-    public static int romanToInt(String s) {
-        int[] values = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
-        String[] romans = {"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"};
-
+    public static int romanToInt(String s) {        
         int result = 0;
-        while (s.length() > 0) {
-            for (int j = 0; j < romans.length; j++) {
-                if (s.startsWith(romans[j])) {  
-                    result += values[j];  
-                    s = s.substring(romans[j].length());  
-                    break;  
-                }
+        
+        for (int i = 0; i < s.length(); i++) {
+            int currentValue = getRomanValue(s.charAt(i));
+            
+            if (i + 1 < s.length() && currentValue < getRomanValue(s.charAt(i + 1))) {
+                result -= currentValue;
+            } else {
+                result += currentValue;
             }
         }
-
+        
         return result;
-
+    }
+    
+    private static int getRomanValue(char ch) {
+        switch (ch) {
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+            default: return 0;
+        }
     }
 }
